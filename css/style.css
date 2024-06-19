@@ -69,7 +69,36 @@ section {
     border: var(--border-hover);
 }
 
-/* HEADER */
+/* Keep the nav bar styling normal */
+nav {
+    height: 60px; /* Adjust this according to your nav bar height */
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color:; /* Example background color */
+}
+
+/* Container for the logo to handle positioning */
+.logo-container {
+    position: relative;
+    height: 60px; /* Same as nav bar height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Resize the specific logo */
+.resize-logo {
+    height: 110px; /* Set the desired height */
+    width: 110px;  /* Set the desired width */
+    object-fit: cover; /* Ensure the image covers the given dimensions */
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust to center the logo */
+}
+
+
+
 
 .header {
     position: fixed;
@@ -80,7 +109,7 @@ section {
     align-items: center;
     justify-content: space-between;
     z-index: 1000;
-    background: #fff;
+    background: #c7a68f;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
     padding: 2rem 9%;
 }
