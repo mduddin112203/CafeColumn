@@ -69,8 +69,7 @@
 
             <div class="content">
                 <h3 class="title">What is Cafe Column?</h3>
-                <p>
-We are a blog started by two college students who share a deep love for cafes, coffee, and the beautiful moments they create. Our journey began over countless cups of coffee shared during long, sleepless nights in college, where we found that the best memories were made in the cozy corners of our favorite cafes. At Cafe Column, we dive into the full experience of every cafe we visit, judging them on more than just their menu—because a good cafe is about the vibe, the ambiance, and the welcoming feel just as much as it’s about the perfect cup of coffee. Join us as we sip, savor, and celebrate the wonderful world of cafes, sharing our adventures and inspiring you to discover your own favorite spots.
+                <p>We are a blog started by two college students who share a deep love for cafes, coffee, and the beautiful moments they create. Our journey began over countless cups of coffee shared during long, sleepless nights in college, where we found that the best memories were made in the cozy corners of our favorite cafes. At Cafe Column, we dive into the full experience of every cafe we visit, judging them on more than just their menu—because a good cafe is about the vibe, the ambiance, and the welcoming feel just as much as it’s about the perfect cup of coffee. Join us as we sip, savor, and celebrate the wonderful world of cafes, sharing our adventures and inspiring you to discover your own favorite spots.
                 </p>
                 <a href="#" class="btn">read more</a>
                 <div class="icons-container">
@@ -230,14 +229,25 @@ We are a blog started by two college students who share a deep love for cafes, c
     <section class="book" id="book">
         <section class="contact">
             <h1 class="heading">Blogging <span>review a cafe</span></h1>
-        
-            <form action="">
-                <input type="text" placeholder="Name" class="box">
-                <input type="text" placeholder="Cafe Name" class="box">
-                <input type="file" id="image" name="image" accept="image/*" class="box">
-                <textarea placeholder="Review" class="box" id="" cols="30" rows="10"></textarea>
+            <form id="reviewForm">
+                <input type="text" id="reviewerName" placeholder="Name" class="box" required>
+                <input type="text" id="cafeName" placeholder="Cafe Name" class="box" required>
+                <input type="file" id="reviewImage" name="image" accept="image/*" class="box" required>
+                <textarea id="reviewContent" placeholder="Review" class="box" cols="30" rows="10" required></textarea>
+                <select id="reviewRating" class="box" required>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1">1 Star</option>
+                </select>
                 <input type="submit" value="Submit Review" class="btn">
             </form>
+            
+            
+            
+            
+            
         </section>
         
 
