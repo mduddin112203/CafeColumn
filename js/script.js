@@ -56,15 +56,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const cafeName = document.getElementById('cafeName').value;
         const reviewContent = document.getElementById('reviewContent').value;
         const reviewImage = document.getElementById('reviewImage').files[0];
+        const reviewRating = document.getElementById('reviewRating').value;
 
-        if (reviewerName && cafeName && reviewContent && reviewImage) {
+        if (reviewerName && cafeName && reviewContent && reviewImage && reviewRating) {
             const reader = new FileReader();
             reader.onload = function(event) {
                 const review = {
                     reviewerName,
                     cafeName,
                     reviewContent,
-                    reviewImage: event.target.result
+                    reviewImage: event.target.result,
+                    reviewRating
                 };
 
                 // Save review to localStorage
@@ -83,17 +85,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Append Review Function
     function appendReview(review) {
+        const starsHTML = Array.from({ length: review.reviewRating }, () => '<i class="fas fa-star"></i>').join('');
+
         const reviewHTML = `
             <div class="swiper-slide box">
                 <i class="fas fa-quote-left"></i>
                 <i class="fas fa-quote-right"></i>
                 <img src="${review.reviewImage}" alt="Review Image">
                 <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
+                    ${starsHTML}
                 </div>
                 <p>${review.reviewContent}</p>
                 <h3>${review.cafeName}</h3>
@@ -106,4 +106,3 @@ document.addEventListener('DOMContentLoaded', function() {
         swiper.update();
     }
 });
-
