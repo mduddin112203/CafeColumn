@@ -26,7 +26,6 @@
         <div id="menu-btn" class="fas fa-bars"></div>
         <a href="#"><img src="image/logotran2.png" class="resize-logo" alt="Blog Logo"></a>
 
-
         <nav class="navbar">
             <a href="#home">home</a>
             <a href="#about">about</a>
@@ -157,69 +156,7 @@
 
         <div class="swiper review-slider">
             <div class="swiper-wrapper">
-                <div class="swiper-slide box">
-                    <i class="fas fa-quote-left"></i>
-                    <i class="fas fa-quote-right"></i>
-                    <img src="image/pic-1.png" alt="">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>lol.</p>
-                    <h3>Cafe Nero</h3>
-                    <span>Hailey Hsiung</span>
-                </div>
-
-                <div class="swiper-slide box">
-                    <i class="fas fa-quote-left"></i>
-                    <i class="fas fa-quote-right"></i>
-                    <img src="image/pic-2.png" alt="">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>lol.</p>
-                    <h3>john deo</h3>
-                    <span>satisfied client</span>
-                </div>
-
-                <div class="swiper-slide box">
-                    <i class="fas fa-quote-left"></i>
-                    <i class="fas fa-quote-right"></i>
-                    <img src="image/pic-3.png" alt="">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>lol.</p>
-                    <h3>john deo</h3>
-                    <span>satisfied client</span>
-                </div>
-
-                <div class="swiper-slide box">
-                    <i class="fas fa-quote-left"></i>
-                    <i class="fas fa-quote-right"></i>
-                    <img src="image/pic-4.png" alt="">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>lol.</p>
-                    <h3>john deo</h3>
-                    <span>satisfied client</span>
-                </div>
+                <!-- Reviews will be appended here dynamically -->
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -245,58 +182,140 @@
             </form>
         </section>
     </section>
-    
-        
 
     <!-- FOOTER -->
     <section class="footer">
         <div class="box-container">
-
-            <div class="box">
-                <h3>quick links</h3>
-                <a href="#home"><i class="fas fa-arrow-right"></i> home</a>
-                <a href="#about"><i class="fas fa-arrow-right"></i> about</a>
-                <a href="#menu"><i class="fas fa-arrow-right"></i> favorite cafes</a>
-                <a href="#review"><i class="fas fa-arrow-right"></i> reviews</a>
-                <a href="#book"><i class="fas fa-arrow-right"></i> blogs</a>
-            </div>
-
-            <div class="box">
-                <h3>contact info</h3>
-                <a href="tel:9738078462"><i class="fas fa-phone"></i> 973-807-8462</a>
-                <a href="tel:0000000000"><i class="fas fa-phone"></i> 000-000-0000</a>
-                <a href="mailto:cafecolumn@gmail.com">
-                    <i class="fas fa-envelope"></i>cafecolumn@gmail.com
-                </a>
-            </div>
-
-            <div class="box">
-                <h3>Social Media</h3>
-                <a href="https://www.instagram.com/cafecolumn/" target="_blank"><i class="fab fa-instagram"></i> instagram</a>
-            </div>
+            <!-- Existing footer content -->
         </div>
-
-        <div class="credit">created by Hailey Hsiung and Md Uddin | all rights reserved</div>
+        <div class="credit">
+            <button id="clearStorageBtn" class="btn">Clear All Reviews</button>
+            created by Hailey Hsiung and Md Uddin | all rights reserved
+        </div>
     </section>
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- SWIPER -->
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
     <!-- Custom JS File Link  -->
-    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu and Navbar Toggle
+            let menu = document.querySelector('#menu-btn');
+            let navbar = document.querySelector('.navbar');
 
+            menu.onclick = () => {
+                menu.classList.toggle('fa-times');
+                navbar.classList.toggle('active');
+            };
+
+            window.onscroll = () => {
+                menu.classList.remove('fa-times');
+                navbar.classList.remove('active');
+            };
+
+            // Image Slider Functionality
+            document.querySelectorAll('.image-slider img').forEach(images => {
+                images.onclick = () => {
+                    var src = images.getAttribute('src');
+                    document.querySelector('.main-home-image').src = src;
+                };
+            });
+
+            // Swiper Configuration
+            var swiper = new Swiper(".review-slider", {
+                spaceBetween: 20,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                loop: true,
+                grabCursor: true,
+                autoplay: {
+                    delay: 7500,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    0: {
+                        slidesPerView: 1
+                    },
+                    768: {
+                        slidesPerView: 2
+                    }
+                },
+            });
+
+            // Load existing reviews from localStorage
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            reviews.forEach(review => appendReview(review));
+
+            // Form Submission
+            document.getElementById('reviewForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const reviewerName = document.getElementById('reviewerName').value;
+                const cafeName = document.getElementById('cafeName').value;
+                const reviewContent = document.getElementById('reviewContent').value;
+                const reviewImage = document.getElementById('reviewImage').files[0];
+                const reviewRating = document.getElementById('reviewRating').value;
+
+                if (reviewerName && cafeName && reviewContent && reviewImage && reviewRating) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const review = {
+                            reviewerName,
+                            cafeName,
+                            reviewContent,
+                            reviewImage: event.target.result,
+                            reviewRating
+                        };
+
+                        // Save review to localStorage
+                        reviews.push(review);
+                        localStorage.setItem('reviews', JSON.stringify(reviews));
+
+                        // Append review to page
+                        appendReview(review);
+                        document.getElementById('reviewForm').reset();
+                    };
+                    reader.readAsDataURL(reviewImage);
+                } else {
+                    alert('Please fill out all fields and upload an image.');
+                }
+            });
+
+            // Append Review Function
+            function appendReview(review) {
+                const starsHTML = Array.from({ length: review.reviewRating }, () => '<i class="fas fa-star"></i>').join('');
+
+                const reviewHTML = `
+                    <div class="swiper-slide box">
+                        <i class="fas fa-quote-left"></i>
+                        <i class="fas fa-quote-right"></i>
+                        <img src="${review.reviewImage}" alt="Review Image">
+                        <div class="stars">
+                            ${starsHTML}
+                        </div>
+                        <p>${review.reviewContent}</p>
+                        <h3>${review.cafeName}</h3>
+                        <span>${review.reviewerName}</span>
+                    </div>
+                `;
+
+                const swiperWrapper = document.querySelector('.swiper-wrapper');
+                swiperWrapper.insertAdjacentHTML('beforeend', reviewHTML);
+                swiper.update();
+            }
+
+            // Clear Local Storage
+            document.getElementById('clearStorageBtn').addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear all reviews?')) {
+                    localStorage.clear();
+                    location.reload(); // Reload the page to reflect the changes
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
