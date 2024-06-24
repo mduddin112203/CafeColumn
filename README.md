@@ -10,7 +10,6 @@ Cafe Column was founded by two college friends who share a passion for cafes and
 
 - **Cafe Reviews**: Read detailed reviews of cafes based on their ambiance, service, and more.
 - **Image Submissions**: Share your cafe experiences with us by uploading images along with your reviews.
-- **Community Interaction**: Connect with other cafe lovers and share your thoughts in the comments section.
 
 ## Contact Us
 
