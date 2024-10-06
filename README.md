@@ -20,4 +20,4 @@ Feel free to reach out to us via email or DM us on Instagram for any questions o
 
 ## Visit Cafe Column
 
-Explore our reviews and join the conversation at [Cafe Column](https://mduddin112203.github.io/CafeColumn/).
+Explore our reviews and join the conversation at [Cafe Column](https://www.cafecolumn.com/).
