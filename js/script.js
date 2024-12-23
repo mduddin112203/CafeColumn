@@ -13,14 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
         navbar.classList.remove('active');
     };
 
-    // Image Slider Functionality
-    document.querySelectorAll('.image-slider img').forEach(images => {
-        images.onclick = () => {
-            var src = images.getAttribute('src');
-            document.querySelector('.main-home-image').src = src;
-        };
-    });
-
     // Swiper Configuration
     var swiper = new Swiper(".review-slider", {
         spaceBetween: 20,
@@ -44,9 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
         },
     });
 
-    // Load existing reviews from localStorage
-    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
-    reviews.forEach(review => appendReview(review));
+    // Load existing reviews from MongoDB
+    fetch('http://localhost:5001/api/reviews')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(review => appendReview(review));
+        });
 
     // Form Submission
     document.getElementById('reviewForm').addEventListener('submit', function(event) {
@@ -65,17 +60,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     reviewerName,
                     cafeName,
                     reviewContent,
-                    reviewImage: event.target.result,
+                    reviewImage: event.target.result,  // Base64 image
                     reviewRating
                 };
 
-                // Save review to localStorage
-                reviews.push(review);
-                localStorage.setItem('reviews', JSON.stringify(reviews));
-
-                // Append review to page
-                appendReview(review);
-                document.getElementById('reviewForm').reset();
+                // Send review data to the server
+                fetch('http://localhost:5001/api/reviews', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(review)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Review submitted:', data);
+                    appendReview(data);  // Display the newly submitted review
+                    document.getElementById('reviewForm').reset();  // Reset the form
+                })
+                .catch(error => {
+                    console.error('Error submitting review:', error);
+                    alert('Failed to submit review. Please try again.');
+                });
             };
             reader.readAsDataURL(reviewImage);
         } else {
@@ -86,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Append Review Function
     function appendReview(review) {
         const starsHTML = Array.from({ length: review.reviewRating }, () => '<i class="fas fa-star"></i>').join('');
-
         const reviewHTML = `
             <div class="swiper-slide box">
                 <i class="fas fa-quote-left"></i>
